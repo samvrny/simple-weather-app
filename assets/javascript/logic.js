@@ -2,15 +2,20 @@ var weatherFormEl = document.querySelector("#city-search");
 var weatherFormInput = document.querySelector("#city");
 var lat;
 var lon;
+var city;
+var todaysTemp;
+var temp = [];
 
 //This function takes in the new city name and sends it to be processed
 var clickHandler = function(event) {
     event.preventDefault();
     lat = "";
     lon = "";
+    temp = [];
+    todaysTemp = "";
 
-    var city = weatherFormInput.value.trim();
-    //console.log(city);
+    city = weatherFormInput.value.trim();
+    console.log(city);
 
     if (city) {
         getNewCityLocation(city);
@@ -29,7 +34,7 @@ var getNewCityLocation = function(city) {
 
         if(response.ok) {
             response.json().then(function(data) {
-                //console.log(data);
+                console.log(data);
                 for (var i = 0; i < data.length; i++) {
                     if (data[i].lat) {
                         lat = data[i].lat;
@@ -59,6 +64,12 @@ var getTheWeather = function() {
         if (response.ok) {
             response.json().then(function(data) {
                 console.log(data);
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].temp) {
+                        todaysTemp = data[i].temp;
+                        console.log(todaysTemp);
+                    } //This is where im stuck. Need to figrue out how to extract the data from this array.
+                }
             });
         }
     });
