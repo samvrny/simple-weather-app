@@ -1,1 +1,1 @@
-# simple-weather-app
+# Simple Weather Dashboard
