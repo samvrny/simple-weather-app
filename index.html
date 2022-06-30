@@ -12,13 +12,47 @@
 
 <body>
 
-    <div class="row">
-
-        <header class="col-12 sticky-top text-danger bg-dark p-4 d-flex align-items-center justify-content-center">
-            <h1 class="text-center">Hello World</h1>
+    <div class="row d-flex">
+        <!--header-->
+        <header class="col-12 sticky-top text-light bg-dark p-4 d-flex align-items-center justify-content-center">
+            <h1 class="text-center">Local Weather Dashboard</h1>
         </header>
+        <!--end header-->
         <main>
+            <!--search bar and history-->
+            <div class="row d-flex m-2">
+            <section id="left-side" class="col-md-3 col-12">
+                <div class="col-12 card d-flex">
+                    <div class="card-header text-center">
+                         Enter City Name
+                    </div>
+                    <form id="city-search" class="card-body d-flex flex-column justify-content-center align-items-center">
+                        <label class="form-label" for="city">City:</label>
+                        <input placeholder="Albequerque" id="city" type="text" class="form-control m-2" />
+                        <button type="submit" class="btn btn-info text-light m-2">Get Weather</button>
+                    </form>
+                </div>
+                <div class="col-12 card d-flex mt-2">
+                    <div class="card-header text-center">
+                        Search Again
+                    </div>
+                    <div id="search-history">
 
+                    </div>
+                </div>
+            </section>
+            <!--end search bar and history-->
+            <!--weather display-->
+            <!--end weather display-->
+            <section id="right-side" class="col-md-9 col-12 hide">
+                <div id="current-city" class="bg-primary col-12 d-flex rounded-3 border border-primary border-3">
+                    Content Here
+                </div>
+                <div id="city-cards" class="bg-light col-12 d-flex mt-2 border border-primary rounded-3 border-3">
+                    Content Here
+                </div>
+            </section>
+            </div>
         </main>
 
     </div>
