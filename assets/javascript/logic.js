@@ -51,7 +51,18 @@ var getNewCityLocation = function(city) {
 };
 
 var getTheWeather = function() {
-    console.log(lat, lon, "yay");
+    //console.log(lat, lon, "yay");
+
+    var weatherApiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=&appid=0743f583ed199b32639e47dedaa949e4";
+    
+    fetch(weatherApiUrl).then(function(response) {
+        if (response.ok) {
+            response.json().then(function(data) {
+                console.log(data);
+            });
+        }
+    });
+    
 }
 
 weatherFormEl.addEventListener("submit", clickHandler);
