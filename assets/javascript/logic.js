@@ -1,12 +1,16 @@
 var weatherFormEl = document.querySelector("#city-search");
 var weatherFormInput = document.querySelector("#city");
+var lat;
+var lon;
 
 //This function takes in the new city name and sends it to be processed
 var clickHandler = function(event) {
     event.preventDefault();
+    lat = "";
+    lon = "";
 
     var city = weatherFormInput.value.trim();
-    console.log(city);
+    //console.log(city);
 
     if (city) {
         getNewCityLocation(city);
@@ -25,13 +29,18 @@ var getNewCityLocation = function(city) {
 
         if(response.ok) {
             response.json().then(function(data) {
-                console.log(data);
+                //console.log(data);
                 for (var i = 0; i < data.length; i++) {
                     if (data[i].lat) {
-                        var lat = data[i].lat;
-                        console.log(lat);
+                        lat = data[i].lat;
+                        //console.log(lat);
+                    }
+                    if (data[i].lon) {
+                        lon = data[i].lon;
+                        //console.log(lon);
                     }
                 }
+                getTheWeather();
             });
         }
         else {
@@ -41,8 +50,8 @@ var getNewCityLocation = function(city) {
 
 };
 
-var getTheWeather = function(lat, lon) {
-    console.log(lat, lon);
+var getTheWeather = function() {
+    console.log(lat, lon, "yay");
 }
 
 weatherFormEl.addEventListener("submit", clickHandler);
