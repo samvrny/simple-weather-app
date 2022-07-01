@@ -63,13 +63,19 @@ var getTheWeather = function() {
     fetch(weatherApiUrl).then(function(response) {
         if (response.ok) {
             response.json().then(function(data) {
-                console.log(data);
-                for (var i = 0; i < data.length; i++) {
-                    if (data[i].temp) {
-                        todaysTemp = data[i].temp;
-                        console.log(todaysTemp);
-                    } //This is where im stuck. Need to figrue out how to extract the data from this array.
+                console.log(data.current.temp);
+
+                if (data.current.temp) {
+                    todaysTemp = data.current.temp;
+                    console.log(todaysTemp);
                 }
+
+                // for (var i = 0; i < data.length; i++) {
+                //     if (data.current.temp) {
+                //         todaysTemp = data.current.temp;
+                //         console.log(todaysTemp);
+                //     } //This is where im stuck. Need to figrue out how to extract the data from this array.
+                // } console.log(todaysTemp);
             });
         }
     });
