@@ -59,7 +59,6 @@ var getNewCityLocation = function(city) {
             alert("Something went wrong");
         }
     });
-
 };
 
 var getTheWeather = function() {
@@ -92,8 +91,6 @@ var getTheWeather = function() {
                     todaysUv = data.current.uvi;
                     console.log(todaysUv, "uvi"); //console.log
                 }
-
-
                 printTheWeatherCurrent();
             });
         }
@@ -107,30 +104,36 @@ var printTheWeatherCurrent = function() {
         currentCity.removeChild(currentCity.firstChild);
     }
 
-    var currentCityName = document.createElement("h3")
-    currentCityName.textContent = city;
+    var currentCityName = document.createElement("h2")
+    currentCityName.textContent = "Current Weather For " + city;
     currentCity.appendChild(currentCityName);
-
-    var currentCityTemp = document.createElement("p");
-    currentCityTemp.textContent = todaysTemp + " Degrees.";
-    currentCity.appendChild(currentCityTemp);
 
     var currentCityIcon = document.createElement("img");
     currentCityIcon.setAttribute("src", "http://openweathermap.org/img/wn/" + todaysIcon + "@2x.png");
     currentCity.appendChild(currentCityIcon);
 
+    var currentCityTemp = document.createElement("p");
+    currentCityTemp.textContent = "Temperature: " + todaysTemp + " Degrees. Ouch!";
+    currentCity.appendChild(currentCityTemp);
+
+    // var currentCityIcon = document.createElement("img");
+    // currentCityIcon.setAttribute("src", "http://openweathermap.org/img/wn/" + todaysIcon + "@2x.png");
+    // currentCity.appendChild(currentCityIcon);
+
     var currentCityHumidity = document.createElement("p");
-    currentCityHumidity.textContent = todaysHumidity + " %";
+    currentCityHumidity.textContent = "Humidity: " + todaysHumidity + " %";
     currentCity.appendChild(currentCityHumidity);
 
     var currentCityUv = document.createElement("p");
-    currentCityUv.textContent = todaysUv;
+    currentCityUv.textContent = "UV Index: " + todaysUv;
     currentCity.appendChild(currentCityUv);
 
     var currentCityWind = document.createElement("p");
-    currentCityWind.textContent = todaysWind + " M.P.H.";
+    currentCityWind.textContent = "Wind Speed: " + todaysWind + " M.P.H.";
     currentCity.appendChild(currentCityWind);
 };
+
+
 
 //need the city name, the current date, the icon for weather, the temp, humidity, wind speed, UV index
 weatherFormEl.addEventListener("submit", clickHandler);

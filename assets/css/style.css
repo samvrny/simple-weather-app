@@ -5,3 +5,18 @@ body {
 .hide {
     display: none;
 }
+
+.current img {
+    display: block;
+    margin: auto;
+    max-height: 125px;
+    max-width: 125px;
+
+}
+
+.current h2 {
+    text-align: center;
+    margin: 4px;
+    color: lightgray;
+    font-size: 35px;
+}
