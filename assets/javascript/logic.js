@@ -19,7 +19,6 @@ var clickHandler = function(event) {
     lat = "";
     lon = "";
     //temp = [];
-    //todaysTemp = "";
 
     city = weatherFormInput.value.trim();
     console.log(city);
@@ -35,13 +34,14 @@ var clickHandler = function(event) {
 
 //This function grabs the latitude and longitude from a geo API to use to grab weather data
 var getNewCityLocation = function(city) {
+    //later will add another search field/OR a dropdown menu to chose locations from
     var geoApiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=0743f583ed199b32639e47dedaa949e4";
 
     fetch(geoApiUrl).then(function(response) {
 
         if(response.ok) {
             response.json().then(function(data) {
-                console.log(data);
+                //console.log(data);
                 for (var i = 0; i < data.length; i++) {
                     if (data[i].lat) {
                         lat = data[i].lat;
@@ -74,13 +74,25 @@ var getTheWeather = function() {
 
                 if (data.current.temp) {
                     todaysTemp = data.current.temp;
-                    console.log(todaysTemp); //cosolelog
+                    console.log(todaysTemp, "temp"); //cosolelog
                 }
-                //console.log(data.current.weather[0].icon);
                 if (data.current.weather[0].icon) {
                     todaysIcon = data.current.weather[0].icon;
                 }
-                console.log(todaysIcon);
+                console.log(todaysIcon, "icon"); //console.log
+                if (data.current.wind_speed) {
+                    todaysWind = data.current.wind_speed;
+                    console.log(todaysWind, "wind"); //console.log
+                }
+                if(data.current.humidity) {
+                    todaysHumidity = data.current.humidity;
+                    console.log(todaysHumidity, "humidity"); //console.log
+                }
+                if (data.current.uvi) {
+                    todaysUv = data.current.uvi;
+                    console.log(todaysUv, "uvi"); //console.log
+                }
+
 
                 printTheWeatherCurrent();
             });
@@ -89,8 +101,7 @@ var getTheWeather = function() {
 };
 
 var printTheWeatherCurrent = function() {
-    console.log("hello world");
-
+    
     rightSide.classList.remove("hide");
     while (currentCity.firstChild) { //This removes the old weather data
         currentCity.removeChild(currentCity.firstChild);
@@ -104,12 +115,22 @@ var printTheWeatherCurrent = function() {
     currentCityTemp.textContent = todaysTemp + " Degrees.";
     currentCity.appendChild(currentCityTemp);
 
-    var currentCityIcon = document.createElement("img")
+    var currentCityIcon = document.createElement("img");
     currentCityIcon.setAttribute("src", "http://openweathermap.org/img/wn/" + todaysIcon + "@2x.png");
     currentCity.appendChild(currentCityIcon);
 
+    var currentCityHumidity = document.createElement("p");
+    currentCityHumidity.textContent = todaysHumidity + " %";
+    currentCity.appendChild(currentCityHumidity);
 
-}
+    var currentCityUv = document.createElement("p");
+    currentCityUv.textContent = todaysUv;
+    currentCity.appendChild(currentCityUv);
+
+    var currentCityWind = document.createElement("p");
+    currentCityWind.textContent = todaysWind + " M.P.H.";
+    currentCity.appendChild(currentCityWind);
+};
 
 //need the city name, the current date, the icon for weather, the temp, humidity, wind speed, UV index
 weatherFormEl.addEventListener("submit", clickHandler);
