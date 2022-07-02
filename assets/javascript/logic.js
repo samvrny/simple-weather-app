@@ -64,7 +64,7 @@ var getNewCityLocation = function(city) {
 var getTheWeather = function() {
     //console.log(lat, lon, "yay");
 
-    var weatherApiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=&appid=0743f583ed199b32639e47dedaa949e4";
+    var weatherApiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=&units=imperial&appid=0743f583ed199b32639e47dedaa949e4";
     
     fetch(weatherApiUrl).then(function(response) {
         if (response.ok) {
@@ -113,12 +113,8 @@ var printTheWeatherCurrent = function() {
     currentCity.appendChild(currentCityIcon);
 
     var currentCityTemp = document.createElement("p");
-    currentCityTemp.textContent = "Temperature: " + todaysTemp + " Degrees. Ouch!";
+    currentCityTemp.textContent = "Temperature: " + todaysTemp + " Degrees.";
     currentCity.appendChild(currentCityTemp);
-
-    // var currentCityIcon = document.createElement("img");
-    // currentCityIcon.setAttribute("src", "http://openweathermap.org/img/wn/" + todaysIcon + "@2x.png");
-    // currentCity.appendChild(currentCityIcon);
 
     var currentCityHumidity = document.createElement("p");
     currentCityHumidity.textContent = "Humidity: " + todaysHumidity + " %";
