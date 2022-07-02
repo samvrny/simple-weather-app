@@ -187,6 +187,11 @@ var futureWeatherCards = function() {
         newCard.appendChild(futureHumidity);
     }
     //needs date, icon, temp, wind speed, humidity
+    //THIS IS WHERE I STOPPED WORKING. CONTINUE AND COMPLETE THE CARDS;
+    //Then: Change color of UV index
+    //make buttons with localStorage
+    //If there's time, figure out how to search by state
+    //All done!
 };
 
 
