@@ -166,13 +166,18 @@ var futureWeatherCards = function() {
         futureWeatherCard.classList.add("card");
         cityCards.appendChild(futureWeatherCard);
 
+        var futureCity = document.createElement("div");
+        futureCity.textContent = city;
+        futureCity.classList.add("card-header");
+        futureWeatherCard.appendChild(futureCity);
+
         var newCard = document.createElement("div")
         newCard.classList.add("card-body");
         futureWeatherCard.appendChild(newCard)
 
-        var futureCity = document.createElement("h3");
-        futureCity.textContent = city;
-        newCard.appendChild(futureCity);
+        // var futureCity = document.createElement("h3");
+        // futureCity.textContent = city;
+        // newCard.appendChild(futureCity);
 
         var futureIcon = document.createElement("img");
         futureIcon.setAttribute("src", "http://openweathermap.org/img/wn/" + dailyIcon + "@2x.png")
@@ -185,6 +190,10 @@ var futureWeatherCards = function() {
         var futureHumidity = document.createElement("p");
         futureHumidity.textContent = "Humidity: " + dailyHumidity + " %";
         newCard.appendChild(futureHumidity);
+
+        var futureWind = document.createElement("p");
+        futureWind.textContent = "Wind Speed: " + dailyWind + " M.P.H."
+        newCard.appendChild(futureWind);
     }
     //needs date, icon, temp, wind speed, humidity
     //THIS IS WHERE I STOPPED WORKING. CONTINUE AND COMPLETE THE CARDS;
