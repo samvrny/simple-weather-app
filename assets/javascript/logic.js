@@ -173,11 +173,7 @@ var futureWeatherCards = function() {
 
         var newCard = document.createElement("div")
         newCard.classList.add("card-body");
-        futureWeatherCard.appendChild(newCard)
-
-        // var futureCity = document.createElement("h3");
-        // futureCity.textContent = city;
-        // newCard.appendChild(futureCity);
+        futureWeatherCard.appendChild(newCard);
 
         var futureIcon = document.createElement("img");
         futureIcon.setAttribute("src", "http://openweathermap.org/img/wn/" + dailyIcon + "@2x.png")
@@ -201,7 +197,7 @@ var futureWeatherCards = function() {
     //make buttons with localStorage
     //If there's time, figure out how to search by state
     //All done!
-};
+};  
 
 
 
