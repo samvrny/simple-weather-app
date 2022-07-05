@@ -3,6 +3,7 @@ var weatherFormInput = document.querySelector("#city");
 var rightSide = document.querySelector("#right-side");
 var currentCity = document.getElementById("current-city");
 var cityCards = document.getElementById("city-cards");
+var history = document.getElementById("search-history");
 var lat;
 var lon;
 var city;
@@ -24,6 +25,7 @@ var clickHandler = function(event) {
     console.log(city);
 
     if (city) {
+        buttonMaker();
         getNewCityLocation(city);
         weatherFormInput.value = ""; //will need to change this later so that the city shows up for the weather input
     }
@@ -62,7 +64,7 @@ var getNewCityLocation = function(city) {
 };
 
 var getTheWeather = function() {
-    console.log(lat, lon, "yay"); //consolelog
+    //console.log(lat, lon, "yay"); //consolelog
 
     var weatherApiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=&units=imperial&appid=0743f583ed199b32639e47dedaa949e4";
     
@@ -197,9 +199,14 @@ var futureWeatherCards = function() {
     //make buttons with localStorage
     //If there's time, figure out how to search by state
     //All done!
-};  
+};
+
+var buttonMaker = function() {
+    console.log("city pretty");
+};
 
 
 
 //need the city name, the current date, the icon for weather, the temp, humidity, wind speed, UV index
 weatherFormEl.addEventListener("submit", clickHandler);
+//weatherFormEl.addEventListener("submit", buttonMaker);
