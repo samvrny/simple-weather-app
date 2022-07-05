@@ -14,11 +14,17 @@ var todaysUv;
 var todaysHumidity;
 var fiveDayWeather = [];
 var currentDate;
+var fiveDayDate;
 
 var getCurrentDate = function() {
     currentDate = moment().format("dddd, MMMM Do");
-    console.log(currentDate);
+    //getFiveDayDate();
 };
+
+// var getFiveDayDate = function() {
+//     fiveDayDate = moment().add(1, 'days').format("M/D");
+//     console.log(fiveDayDate);
+// }
 
 //This function takes in the new city name and sends it to be processed
 var clickHandler = function(event) {
@@ -157,8 +163,12 @@ var removeCards = function() {
 };
 
 var futureWeatherCards = function() {
-    //console.log(fiveDayWeather, "Moo");
+    
+    fiveDayDate = moment().format("M/D");
+
     for (var i = 0; i < 5; i++) {
+
+        fiveDayDate = moment(fiveDayDate, "M/D").add(1, "days").format("M/D");
 
         var dailyIcon = fiveDayWeather[i].weather[0].icon;
         //console.log(dailyIcon);
@@ -177,7 +187,7 @@ var futureWeatherCards = function() {
         cityCards.appendChild(futureWeatherCard);
 
         var futureCity = document.createElement("div");
-        futureCity.textContent = city;
+        futureCity.textContent = city + " " + fiveDayDate;
         futureCity.classList.add("card-header");
         futureWeatherCard.appendChild(futureCity);
 
