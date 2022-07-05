@@ -4,6 +4,8 @@ var rightSide = document.querySelector("#right-side");
 var currentCity = document.getElementById("current-city");
 var cityCards = document.getElementById("city-cards");
 var searchHistory = document.getElementById("search-history");
+//var orange = document.getElementById("melon");
+//console.log(orange);
 var lat;
 var lon;
 var city;
@@ -206,9 +208,9 @@ var newCityButton;
 
 var buttonMaker = function() {
     newCityButton = document.createElement("button");
-    newCityButton.setAttribute("id", city);
+    newCityButton.setAttribute("id", "melon");
     newCityButton.setAttribute("value", city);
-    newCityButton.classList.add("btn-primary", "btn", "my-1", "history");
+    newCityButton.classList.add("btn-primary", "btn", "my-1", "history", "link");
     newCityButton.innerText = city;
     searchHistory.appendChild(newCityButton);
 
@@ -217,7 +219,7 @@ var buttonMaker = function() {
 
 var saveButton = function() {
 
-    var newButton = document.getElementById(city).value;
+    var newButton = document.getElementById("melon").value;
     console.log(newButton);
     
     if (localStorage.getItem("citylist") == null) {
@@ -246,15 +248,20 @@ var loadButtons = function() {
     for (var i = 0; i < savedButtons.length; i++) {
         var apple = document.createElement("button");
         apple.setAttribute("id", savedButtons[i]);
-        apple.classList.add("btn-primary", "btn", "my-1", "history");
+        apple.classList.add("btn-primary", "btn", "my-1", "history", "link");
         apple.innerText = savedButtons[i];
         searchHistory.appendChild(apple);
-    }
-         
+    }      
+};
+
+var backInTime = function() {
+    console.log("This Is Working");
 };
 
 
 
 //need the city name, the current date, the icon for weather, the temp, humidity, wind speed, UV index
 weatherFormEl.addEventListener("submit", clickHandler);
+//orange.addEventListener("click", backInTime);
+
 loadButtons();
