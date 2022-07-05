@@ -201,17 +201,31 @@ var futureWeatherCards = function() {
     //All done!
 };
 
+var newCityButton;
+
 var buttonMaker = function() {
-    console.log("city pretty");
-    var newCityButton = document.createElement("button");
-    newCityButton.setAttribute("id", city);
+    newCityButton = document.createElement("button");
+    newCityButton.setAttribute("id","cities");
+    newCityButton.setAttribute("value", city);
     newCityButton.classList.add("btn-primary", "btn", "my-1", "history");
     newCityButton.innerText = city;
     searchHistory.appendChild(newCityButton);
+
+    saveButton();
+};
+
+var saveButton = function() {
+    var newButton = document.getElementById("cities").value;
+    console.log(newButton);
+    localStorage.setItem("citylist", JSON.stringify(newButton));
+};
+
+var loadButtons = function() {
+
 };
 
 
 
 //need the city name, the current date, the icon for weather, the temp, humidity, wind speed, UV index
 weatherFormEl.addEventListener("submit", clickHandler);
-//weatherFormEl.addEventListener("submit", buttonMaker);
+//newCityButton.addEventListener("click", clickHandler);
