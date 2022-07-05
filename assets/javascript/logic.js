@@ -138,6 +138,19 @@ var printTheWeatherCurrent = function() {
 
     var currentCityUv = document.createElement("p");
     currentCityUv.textContent = "UV Index: " + todaysUv;
+    currentCityUv.classList.add("px-3", "rounded-3")
+    if (todaysUv <= 2) {
+        currentCityUv.classList.add("bg-success");
+    }
+    else if (todaysUv > 2 && todaysUv <= 5) {
+        currentCityUv.classList.add("bg-warning");
+    }
+    else if (todaysUv > 5 && todaysUv <= 7) {
+        currentCityUv.classList.add("orange");
+    }
+    else if (todaysUv > 7 && todaysUv <= 10) {
+        currentCityUv.classList.add("bg-danger");
+    }
     currentCity.appendChild(currentCityUv);
 
     var currentCityWind = document.createElement("p");

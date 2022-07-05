@@ -24,3 +24,7 @@ body {
 .history {
     width: 100%;
 }
+
+.orange {
+    background-color: orange;
+}
