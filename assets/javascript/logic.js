@@ -4,8 +4,6 @@ var rightSide = document.querySelector("#right-side");
 var currentCity = document.getElementById("current-city");
 var cityCards = document.getElementById("city-cards");
 var searchHistory = document.getElementById("search-history");
-//var orange = document.getElementById("melon");
-//console.log(orange);
 var lat;
 var lon;
 var city;
@@ -35,6 +33,8 @@ var clickHandler = function(event) {
     else {
         alert("You must enter in a valid city!");
     }
+
+    saveButton();
 };
 
 //This function grabs the latitude and longitude from a geo API to use to grab weather data
@@ -208,13 +208,12 @@ var buttonMaker = function() {
     newCityButton.classList.add("btn-primary", "btn", "my-1", "history");
     newCityButton.innerText = city;
     searchHistory.appendChild(newCityButton);
-
-    saveButton();
+    
 };
 
 var saveButton = function() {
 
-    var newButton = document.getElementById("melon").value;
+    var newButton = city 
     console.log(newButton);
     
     if (localStorage.getItem("citylist") == null) {
@@ -242,7 +241,8 @@ var loadButtons = function() {
 
     for (var i = 0; i < savedButtons.length; i++) {
         var apple = document.createElement("button");
-        apple.setAttribute("id", savedButtons[i]);
+        apple.setAttribute("id", "melon");
+        apple.setAttribute("value", savedButtons[i]);
         apple.classList.add("btn-primary", "btn", "my-1", "history");
         apple.innerText = savedButtons[i];
         searchHistory.appendChild(apple);
@@ -254,10 +254,7 @@ var backInTime = function() {
 };
 
 
-
-//need the city name, the current date, the icon for weather, the temp, humidity, wind speed, UV index
 weatherFormEl.addEventListener("submit", clickHandler);
-//orange.addEventListener("click", backInTime);
 
 loadButtons();
 
