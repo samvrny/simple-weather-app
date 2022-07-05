@@ -32,7 +32,7 @@ var clickHandler = function(event) {
         weatherFormInput.value = "";
     }
     else {
-        alert("You must enter in a valid city!");
+        alert("You must enter a valid city!");
     }
 
     saveButton();
@@ -174,19 +174,15 @@ var futureWeatherCards = function() {
 
     for (var i = 0; i < 5; i++) {
 
-        fiveDayDate = moment(fiveDayDate, "M/D").add(1, "days").format("M/D");
+        fiveDayDate = moment(fiveDayDate, "M/D").add(1, "days").format("M/D/YY");
 
         var dailyIcon = fiveDayWeather[i].weather[0].icon;
-        //console.log(dailyIcon);
 
         var dailyTemp = fiveDayWeather[i].temp.day;
-        //console.log(dailyTemp);
 
         var dailyHumidity = fiveDayWeather[i].humidity;
-        //console.log(dailyHumidity);
 
         var dailyWind = fiveDayWeather[i].wind_speed;
-        //console.log(dailyWind, "Wind");
 
         var futureWeatherCard = document.createElement("div");
         futureWeatherCard.classList.add("card");
@@ -220,7 +216,7 @@ var futureWeatherCards = function() {
 
 };
 
-var newCityButton;
+var newCityButton; // remove this and put the var in the buttonmaker function
 
 var buttonMaker = function() {
     newCityButton = document.createElement("button");
@@ -270,21 +266,13 @@ var loadButtons = function() {
     }      
 };
 
-var backInTime = function() {
-    console.log("This Is Working");
-    oldWeather = document.querySelector("#melon","value");
-    console.log(oldWeather);
-};
-
+$("#search-history").on("click", "button", function() {
+    var captureClick = $(this).val();
+    city = captureClick;
+    getNewCityLocation(city);
+});
 
 weatherFormEl.addEventListener("submit", clickHandler);
-searchHistory.addEventListener("click", backInTime);
 
 loadButtons();
-
-//what Needs to happen/ where im at:
-//Need to make the buttons into links
-//Need to add the time
-//Need to Finish basic styling
-//The end!
 
