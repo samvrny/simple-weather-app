@@ -16,16 +16,6 @@ var fiveDayWeather = [];
 var currentDate;
 var fiveDayDate;
 
-var getCurrentDate = function() {
-    currentDate = moment().format("dddd, MMMM Do");
-    //getFiveDayDate();
-};
-
-// var getFiveDayDate = function() {
-//     fiveDayDate = moment().add(1, 'days').format("M/D");
-//     console.log(fiveDayDate);
-// }
-
 //This function takes in the new city name and sends it to be processed
 var clickHandler = function(event) {
     event.preventDefault();
@@ -39,7 +29,7 @@ var clickHandler = function(event) {
     if (city) {
         buttonMaker();
         getNewCityLocation(city);
-        weatherFormInput.value = ""; //will need to change this later so that the city shows up for the weather input
+        weatherFormInput.value = "";
     }
     else {
         alert("You must enter in a valid city!");
@@ -127,6 +117,8 @@ var printTheWeatherCurrent = function() {
     while (currentCity.firstChild) { //This removes the old weather data
         currentCity.removeChild(currentCity.firstChild);
     }
+
+    currentDate = moment().format("dddd, MMMM Do");
 
     var currentCityName = document.createElement("h2")
     currentCityName.textContent = "Current Weather For " + city + " " + currentDate;
@@ -275,7 +267,6 @@ weatherFormEl.addEventListener("submit", clickHandler);
 searchHistory.addEventListener("click", backInTime);
 
 loadButtons();
-getCurrentDate();
 
 //what Needs to happen/ where im at:
 //Need to make the buttons into links
