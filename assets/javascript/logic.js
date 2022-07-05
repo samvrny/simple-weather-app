@@ -235,6 +235,7 @@ var saveButton = function() {
 
 var loadButtons = function() {
     var savedButtons = localStorage.getItem("citylist")
+    console.log(savedButtons);
 
     if (!savedButtons) {
         return false;
@@ -242,13 +243,18 @@ var loadButtons = function() {
 
     savedButtons = JSON.parse(savedButtons);
 
-    for (var i = 0; i < savedButtons.length; i++)
-        buttonMaker(savedButtons[i]);
-    
+    for (var i = 0; i < savedButtons.length; i++) {
+        var apple = document.createElement("button");
+        apple.setAttribute("id", savedButtons[i]);
+        apple.classList.add("btn-primary", "btn", "my-1", "history");
+        apple.innerText = savedButtons[i];
+        searchHistory.appendChild(apple);
+    }
+         
 };
 
 
 
 //need the city name, the current date, the icon for weather, the temp, humidity, wind speed, UV index
 weatherFormEl.addEventListener("submit", clickHandler);
-//loadButtons();
+loadButtons();
