@@ -121,6 +121,7 @@ var printTheWeatherCurrent = function() {
     currentDate = moment().format("dddd, MMMM Do");
 
     var currentCityName = document.createElement("h2")
+    currentCityName.classList.add("text-light");
     currentCityName.textContent = "Current Weather For " + city + " " + currentDate;
     currentCity.appendChild(currentCityName);
 
