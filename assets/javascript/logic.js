@@ -24,7 +24,6 @@ var clickHandler = function(event) {
     city = "";
 
     city = weatherFormInput.value.trim();
-    console.log(city);
 
     if (city) {
         buttonMaker();
@@ -34,28 +33,24 @@ var clickHandler = function(event) {
     else {
         alert("You must enter a valid city!");
     }
-
     saveButton();
 };
 
 //This function grabs the latitude and longitude from a geo API to use to grab weather data
 var getNewCityLocation = function(city) {
-    //later will add another search field/OR a dropdown menu to chose locations from
+    
     var geoApiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=0743f583ed199b32639e47dedaa949e4";
     
     fetch(geoApiUrl).then(function(response) {
 
         if(response.ok) {
             response.json().then(function(data) {
-                //console.log(data);
                 for (var i = 0; i < data.length; i++) {
                     if (data[i].lat) {
                         lat = data[i].lat;
-                        //console.log(lat);
                     }
                     if (data[i].lon) {
                         lon = data[i].lon;
-                        //console.log(lon);
                     }
                 }
                 getTheWeather();
@@ -68,41 +63,33 @@ var getNewCityLocation = function(city) {
 };
 
 var getTheWeather = function() {
-    //console.log(lat, lon, "yay"); //consolelog
 
     var weatherApiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=&units=imperial&appid=0743f583ed199b32639e47dedaa949e4";
     
     fetch(weatherApiUrl).then(function(response) {
         if (response.ok) {
             response.json().then(function(data) {
-                //console.log(data);
 
                 //these if statements set the current weather to variables to print
                 if (data.current.temp) {
                     todaysTemp = data.current.temp;
-                    //console.log(todaysTemp, "temp"); //cosolelog
                 }
                 if (data.current.weather[0].icon) {
                     todaysIcon = data.current.weather[0].icon;
                 }
-                //console.log(todaysIcon, "icon"); //console.log
                 if (data.current.wind_speed) {
                     todaysWind = data.current.wind_speed;
-                    //console.log(todaysWind, "wind"); //console.log
                 }
                 if(data.current.humidity) {
                     todaysHumidity = data.current.humidity;
-                    //console.log(todaysHumidity, "humidity"); //console.log
                 }
                 if (data.current.uvi) {
                     todaysUv = data.current.uvi;
-                    //console.log(todaysUv, "uvi"); //console.log
                 }
 
                 //This sets the daily weather into a variable to use
                 if (data.daily) {
                     fiveDayWeather = data.daily;
-                    //console.log(fiveDayWeather, "Meow");
                 }
                 printTheWeatherCurrent(); //call to current weather display
                 removeCards(); //call to future weather display
@@ -164,7 +151,6 @@ var removeCards = function() {
     while(cityCards.firstChild) {
         cityCards.removeChild(cityCards.firstChild);
     }
-
     futureWeatherCards();
 };
 
@@ -213,25 +199,19 @@ var futureWeatherCards = function() {
         futureWind.textContent = "Wind Speed: " + dailyWind + " M.P.H."
         newCard.appendChild(futureWind);
     }
-
 };
 
-var newCityButton; // remove this and put the var in the buttonmaker function
-
 var buttonMaker = function() {
-    newCityButton = document.createElement("button");
-    newCityButton.setAttribute("id", "melon");
+    var newCityButton = document.createElement("button");
     newCityButton.setAttribute("value", city);
-    newCityButton.classList.add("btn-primary", "btn", "my-1", "history", "link");
+    newCityButton.classList.add("btn-primary", "btn", "my-1", "history");
     newCityButton.innerText = city;
-    searchHistory.appendChild(newCityButton);
-    
+    searchHistory.appendChild(newCityButton);   
 };
 
 var saveButton = function() {
 
     var newButton = city 
-    console.log(newButton);
     
     if (localStorage.getItem("citylist") == null) {
         localStorage.setItem("citylist", "[]");
@@ -240,15 +220,11 @@ var saveButton = function() {
     var oldHistory = JSON.parse(localStorage.getItem("citylist"));
     oldHistory.push(newButton);
 
-    console.log(oldHistory);
-
-    localStorage.setItem("citylist", JSON.stringify(oldHistory));
-    
+    localStorage.setItem("citylist", JSON.stringify(oldHistory));    
 };
 
 var loadButtons = function() {
     var savedButtons = localStorage.getItem("citylist")
-    console.log(savedButtons);
 
     if (!savedButtons) {
         return false;
@@ -258,9 +234,8 @@ var loadButtons = function() {
 
     for (var i = 0; i < savedButtons.length; i++) {
         var apple = document.createElement("button");
-        apple.setAttribute("id", "melon");
         apple.setAttribute("value", savedButtons[i]);
-        apple.classList.add("btn-primary", "btn", "my-1", "history", "link");
+        apple.classList.add("btn-primary", "btn", "my-1", "history");
         apple.innerText = savedButtons[i];
         searchHistory.appendChild(apple);
     }      
