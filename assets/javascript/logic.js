@@ -205,7 +205,7 @@ var buttonMaker = function() {
     newCityButton = document.createElement("button");
     newCityButton.setAttribute("id", "melon");
     newCityButton.setAttribute("value", city);
-    newCityButton.classList.add("btn-primary", "btn", "my-1", "history");
+    newCityButton.classList.add("btn-primary", "btn", "my-1", "history", "link");
     newCityButton.innerText = city;
     searchHistory.appendChild(newCityButton);
     
@@ -243,7 +243,7 @@ var loadButtons = function() {
         var apple = document.createElement("button");
         apple.setAttribute("id", "melon");
         apple.setAttribute("value", savedButtons[i]);
-        apple.classList.add("btn-primary", "btn", "my-1", "history");
+        apple.classList.add("btn-primary", "btn", "my-1", "history", "link");
         apple.innerText = savedButtons[i];
         searchHistory.appendChild(apple);
     }      
@@ -251,10 +251,13 @@ var loadButtons = function() {
 
 var backInTime = function() {
     console.log("This Is Working");
+    oldWeather = document.querySelector("#melon","value");
+    console.log(oldWeather);
 };
 
 
 weatherFormEl.addEventListener("submit", clickHandler);
+searchHistory.addEventListener("click", backInTime);
 
 loadButtons();
 
