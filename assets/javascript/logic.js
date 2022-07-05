@@ -13,7 +13,12 @@ var todaysWind;
 var todaysUv;
 var todaysHumidity;
 var fiveDayWeather = [];
+var currentDate;
 
+var getCurrentDate = function() {
+    currentDate = moment().format("dddd, MMMM Do");
+    console.log(currentDate);
+};
 
 //This function takes in the new city name and sends it to be processed
 var clickHandler = function(event) {
@@ -118,7 +123,7 @@ var printTheWeatherCurrent = function() {
     }
 
     var currentCityName = document.createElement("h2")
-    currentCityName.textContent = "Current Weather For " + city;
+    currentCityName.textContent = "Current Weather For " + city + " " + currentDate;
     currentCity.appendChild(currentCityName);
 
     var currentCityIcon = document.createElement("img");
@@ -260,6 +265,7 @@ weatherFormEl.addEventListener("submit", clickHandler);
 searchHistory.addEventListener("click", backInTime);
 
 loadButtons();
+getCurrentDate();
 
 //what Needs to happen/ where im at:
 //Need to make the buttons into links
