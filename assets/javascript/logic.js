@@ -3,7 +3,7 @@ var weatherFormInput = document.querySelector("#city");
 var rightSide = document.querySelector("#right-side");
 var currentCity = document.getElementById("current-city");
 var cityCards = document.getElementById("city-cards");
-var history = document.getElementById("search-history");
+var searchHistory = document.getElementById("search-history");
 var lat;
 var lon;
 var city;
@@ -203,6 +203,11 @@ var futureWeatherCards = function() {
 
 var buttonMaker = function() {
     console.log("city pretty");
+    var newCityButton = document.createElement("button");
+    newCityButton.setAttribute("id", city);
+    newCityButton.classList.add("btn-primary", "btn", "my-1", "history");
+    newCityButton.innerText = city;
+    searchHistory.appendChild(newCityButton);
 };
 
 
