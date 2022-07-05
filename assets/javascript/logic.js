@@ -196,12 +196,7 @@ var futureWeatherCards = function() {
         futureWind.textContent = "Wind Speed: " + dailyWind + " M.P.H."
         newCard.appendChild(futureWind);
     }
-    //needs date, icon, temp, wind speed, humidity
-    //THIS IS WHERE I STOPPED WORKING. CONTINUE AND COMPLETE THE CARDS;
-    //Then: Change color of UV index
-    //make buttons with localStorage
-    //If there's time, figure out how to search by state
-    //All done!
+
 };
 
 var newCityButton;
@@ -210,7 +205,7 @@ var buttonMaker = function() {
     newCityButton = document.createElement("button");
     newCityButton.setAttribute("id", "melon");
     newCityButton.setAttribute("value", city);
-    newCityButton.classList.add("btn-primary", "btn", "my-1", "history", "link");
+    newCityButton.classList.add("btn-primary", "btn", "my-1", "history");
     newCityButton.innerText = city;
     searchHistory.appendChild(newCityButton);
 
@@ -248,7 +243,7 @@ var loadButtons = function() {
     for (var i = 0; i < savedButtons.length; i++) {
         var apple = document.createElement("button");
         apple.setAttribute("id", savedButtons[i]);
-        apple.classList.add("btn-primary", "btn", "my-1", "history", "link");
+        apple.classList.add("btn-primary", "btn", "my-1", "history");
         apple.innerText = savedButtons[i];
         searchHistory.appendChild(apple);
     }      
@@ -265,3 +260,10 @@ weatherFormEl.addEventListener("submit", clickHandler);
 //orange.addEventListener("click", backInTime);
 
 loadButtons();
+
+//what Needs to happen/ where im at:
+//Need to make the buttons into links
+//Need to add the time
+//Need to Finish basic styling
+//The end!
+
