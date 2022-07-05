@@ -20,6 +20,7 @@ var clickHandler = function(event) {
     event.preventDefault();
     lat = "";
     lon = "";
+    city = "";
 
     city = weatherFormInput.value.trim();
     console.log(city);
@@ -43,7 +44,7 @@ var getNewCityLocation = function(city) {
 
         if(response.ok) {
             response.json().then(function(data) {
-                console.log(data);
+                //console.log(data);
                 for (var i = 0; i < data.length; i++) {
                     if (data[i].lat) {
                         lat = data[i].lat;
@@ -71,7 +72,7 @@ var getTheWeather = function() {
     fetch(weatherApiUrl).then(function(response) {
         if (response.ok) {
             response.json().then(function(data) {
-                console.log(data);
+                //console.log(data);
 
                 //these if statements set the current weather to variables to print
                 if (data.current.temp) {
@@ -205,7 +206,7 @@ var newCityButton;
 
 var buttonMaker = function() {
     newCityButton = document.createElement("button");
-    newCityButton.setAttribute("id","cities");
+    newCityButton.setAttribute("id", city);
     newCityButton.setAttribute("value", city);
     newCityButton.classList.add("btn-primary", "btn", "my-1", "history");
     newCityButton.innerText = city;
@@ -215,17 +216,39 @@ var buttonMaker = function() {
 };
 
 var saveButton = function() {
-    var newButton = document.getElementById("cities").value;
+
+    var newButton = document.getElementById(city).value;
     console.log(newButton);
-    localStorage.setItem("citylist", JSON.stringify(newButton));
+    
+    if (localStorage.getItem("citylist") == null) {
+        localStorage.setItem("citylist", "[]");
+    }
+
+    var oldHistory = JSON.parse(localStorage.getItem("citylist"));
+    oldHistory.push(newButton);
+
+    console.log(oldHistory);
+
+    localStorage.setItem("citylist", JSON.stringify(oldHistory));
+    
 };
 
 var loadButtons = function() {
+    var savedButtons = localStorage.getItem("citylist")
 
+    if (!savedButtons) {
+        return false;
+    }
+
+    savedButtons = JSON.parse(savedButtons);
+
+    for (var i = 0; i < savedButtons.length; i++)
+        buttonMaker(savedButtons[i]);
+    
 };
 
 
 
 //need the city name, the current date, the icon for weather, the temp, humidity, wind speed, UV index
 weatherFormEl.addEventListener("submit", clickHandler);
-//newCityButton.addEventListener("click", clickHandler);
+//loadButtons();
