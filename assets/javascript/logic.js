@@ -26,14 +26,13 @@ var clickHandler = function(event) {
     city = weatherFormInput.value.trim();
 
     if (city) {
-        buttonMaker();
         getNewCityLocation(city);
         weatherFormInput.value = "";
     }
     else {
         alert("You must enter a valid city!");
+        return;
     }
-    saveButton();
 };
 
 //This function takes the city name and grabs the latitude and longitude from a geo API to use to get weather data
@@ -42,9 +41,21 @@ var getNewCityLocation = function(city) {
     var geoApiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=0743f583ed199b32639e47dedaa949e4";
     
     fetch(geoApiUrl).then(function(response) {
-
         if(response.ok) {
             response.json().then(function(data) {
+                if (data.length === 0) {
+                    return;
+                }
+                //this makes sure the search history button for the current selected city doesn't already exist before printing a new button
+                var oldHistory = JSON.parse(localStorage.getItem("citylist"));
+                if (oldHistory === null) {
+                    buttonMaker();
+                }
+                else if (!oldHistory.includes(city)) {
+                    buttonMaker();
+                }
+                saveButton();
+                
                 for (var i = 0; i < data.length; i++) {
                     if (data[i].lat) {
                         lat = data[i].lat;
@@ -54,6 +65,8 @@ var getNewCityLocation = function(city) {
                     }
                 }
                 getTheWeather();
+            }).catch(function(error) {
+                console.log(error);
             });
         }
         else {
@@ -85,6 +98,9 @@ var getTheWeather = function() {
                 }
                 if (data.current.uvi) {
                     todaysUv = data.current.uvi;
+                }
+                if (!data.current.uvi) {
+                    todaysUv = 0;
                 }
 
                 //This sets the daily weather into an array to be used to print the 5 day weather forcast
@@ -222,7 +238,9 @@ var saveButton = function() {
     }
 
     var oldHistory = JSON.parse(localStorage.getItem("citylist"));
-    oldHistory.push(newButton);
+    if (!oldHistory.includes(newButton)) {
+        oldHistory.push(newButton);
+    }
 
     localStorage.setItem("citylist", JSON.stringify(oldHistory));    
 };

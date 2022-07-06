@@ -28,6 +28,11 @@ body {
     background-color: orange;
 }
 
+.scroll {
+    max-height: 350px;
+    overflow: scroll;
+}
+
 @media screen and (max-width: 768px) {
     .adjust {
         flex-direction: column;
