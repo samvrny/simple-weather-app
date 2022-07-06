@@ -16,7 +16,7 @@ var fiveDayWeather = [];
 var currentDate;
 var fiveDayDate;
 
-//This function takes in the new city name and sends it to be processed
+//This function takes in a city name 
 var clickHandler = function(event) {
     event.preventDefault();
     lat = "";
@@ -36,7 +36,7 @@ var clickHandler = function(event) {
     saveButton();
 };
 
-//This function grabs the latitude and longitude from a geo API to use to grab weather data
+//This function takes the city name and grabs the latitude and longitude from a geo API to use to get weather data
 var getNewCityLocation = function(city) {
     
     var geoApiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=0743f583ed199b32639e47dedaa949e4";
@@ -62,6 +62,7 @@ var getNewCityLocation = function(city) {
     });
 };
 
+//this function takes in the latitude and longitude and uses it to get the current weather
 var getTheWeather = function() {
 
     var weatherApiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=&units=imperial&appid=0743f583ed199b32639e47dedaa949e4";
@@ -69,7 +70,6 @@ var getTheWeather = function() {
     fetch(weatherApiUrl).then(function(response) {
         if (response.ok) {
             response.json().then(function(data) {
-
                 //these if statements set the current weather to variables to print
                 if (data.current.temp) {
                     todaysTemp = data.current.temp;
@@ -87,21 +87,23 @@ var getTheWeather = function() {
                     todaysUv = data.current.uvi;
                 }
 
-                //This sets the daily weather into a variable to use
+                //This sets the daily weather into an array to be used to print the 5 day weather forcast
                 if (data.daily) {
                     fiveDayWeather = data.daily;
                 }
-                printTheWeatherCurrent(); //call to current weather display
-                removeCards(); //call to future weather display
+                printTheWeatherCurrent();  
+                futureWeatherCards();
             });
         }
     });
 };
 
+//this function prints out the current weather for the given city 
 var printTheWeatherCurrent = function() {
     
     rightSide.classList.remove("hide");
-    while (currentCity.firstChild) { //This removes the old weather data
+
+    while (currentCity.firstChild) { //This removes the old weather data from the previous search
         currentCity.removeChild(currentCity.firstChild);
     }
 
@@ -127,6 +129,8 @@ var printTheWeatherCurrent = function() {
     var currentCityUv = document.createElement("p");
     currentCityUv.textContent = "UV Index: " + todaysUv;
     currentCityUv.classList.add("px-3", "rounded-3")
+
+    //these if statements add color to the background of the UV index
     if (todaysUv <= 2) {
         currentCityUv.classList.add("bg-success");
     }
@@ -136,7 +140,7 @@ var printTheWeatherCurrent = function() {
     else if (todaysUv > 5 && todaysUv <= 7) {
         currentCityUv.classList.add("orange");
     }
-    else if (todaysUv > 7 && todaysUv <= 10) {
+    else if (todaysUv > 7 && todaysUv <= 15) {
         currentCityUv.classList.add("bg-danger");
     }
     currentCity.appendChild(currentCityUv);
@@ -146,18 +150,16 @@ var printTheWeatherCurrent = function() {
     currentCity.appendChild(currentCityWind);
 };
 
-var removeCards = function() {
+//this function prints the 5 day weather forcast for the given city
+var futureWeatherCards = function() {
 
-    while(cityCards.firstChild) {
+    while(cityCards.firstChild) { //removes the old 5 day forcast
         cityCards.removeChild(cityCards.firstChild);
     }
-    futureWeatherCards();
-};
-
-var futureWeatherCards = function() {
     
     fiveDayDate = moment().format("M/D");
 
+    //loops through the 5 day weather forcast array and prints it on the screen
     for (var i = 0; i < 5; i++) {
 
         fiveDayDate = moment(fiveDayDate, "M/D").add(1, "days").format("M/D/YY");
@@ -201,6 +203,7 @@ var futureWeatherCards = function() {
     }
 };
 
+//turns the given city into a button for search history
 var buttonMaker = function() {
     var newCityButton = document.createElement("button");
     newCityButton.setAttribute("value", city);
@@ -209,6 +212,7 @@ var buttonMaker = function() {
     searchHistory.appendChild(newCityButton);   
 };
 
+//saves the search history buttons to localStorage
 var saveButton = function() {
 
     var newButton = city 
@@ -223,6 +227,7 @@ var saveButton = function() {
     localStorage.setItem("citylist", JSON.stringify(oldHistory));    
 };
 
+//loads the search history buttons from localStorage
 var loadButtons = function() {
     var savedButtons = localStorage.getItem("citylist")
 
@@ -241,13 +246,16 @@ var loadButtons = function() {
     }      
 };
 
+//captures the clicks from the search history buttons and sends the results to the geolocation function
 $("#search-history").on("click", "button", function() {
     var captureClick = $(this).val();
     city = captureClick;
     getNewCityLocation(city);
 });
 
+//listens for a new city name to be submitted and sends it to be turned into weather for the given city
 weatherFormEl.addEventListener("submit", clickHandler);
 
+//calls for the search history buttons to be loaded
 loadButtons();
 
