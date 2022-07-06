@@ -38,7 +38,7 @@ var clickHandler = function(event) {
 //This function takes the city name and grabs the latitude and longitude from a geo API to use to get weather data
 var getNewCityLocation = function(city) {
     
-    var geoApiUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=0743f583ed199b32639e47dedaa949e4";
+    var geoApiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=0743f583ed199b32639e47dedaa949e4";
     
     fetch(geoApiUrl).then(function(response) {
         if(response.ok) {
@@ -78,7 +78,7 @@ var getNewCityLocation = function(city) {
 //this function takes in the latitude and longitude and uses it to get the current weather
 var getTheWeather = function() {
 
-    var weatherApiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=&units=imperial&appid=0743f583ed199b32639e47dedaa949e4";
+    var weatherApiUrl = "http://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=&units=imperial&appid=0743f583ed199b32639e47dedaa949e4";
     
     fetch(weatherApiUrl).then(function(response) {
         if (response.ok) {
@@ -131,7 +131,7 @@ var printTheWeatherCurrent = function() {
     currentCity.appendChild(currentCityName);
 
     var currentCityIcon = document.createElement("img");
-    currentCityIcon.setAttribute("src", "https://openweathermap.org/img/wn/" + todaysIcon + "@2x.png");
+    currentCityIcon.setAttribute("src", "http://openweathermap.org/img/wn/" + todaysIcon + "@2x.png");
     currentCity.appendChild(currentCityIcon);
 
     var currentCityTemp = document.createElement("p");
