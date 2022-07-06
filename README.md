@@ -19,6 +19,6 @@ https://samvrny.github.io/simple-weather-app/
 
 ![](./assets/images/weatherapp.png)
 
-##Contribution
+## Contribution
 
 Made by Samuel Varney
