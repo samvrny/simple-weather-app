@@ -51,7 +51,7 @@ var getNewCityLocation = function(city) {
                 if (oldHistory === null) {
                     buttonMaker();
                 }
-                else if (!oldHistory.includes(city)) {
+                else if (!oldHistory.includes(city.charAt(0).toUpperCase() + city.slice(1).toLowerCase())) {
                     buttonMaker();
                 }
                 saveButton();
@@ -224,14 +224,14 @@ var buttonMaker = function() {
     var newCityButton = document.createElement("button");
     newCityButton.setAttribute("value", city);
     newCityButton.classList.add("btn-primary", "btn", "my-1", "history");
-    newCityButton.innerText = city;
+    newCityButton.innerText = city.charAt(0).toUpperCase() + city.slice(1).toLowerCase();
     searchHistory.appendChild(newCityButton);   
 };
 
 //saves the search history buttons to localStorage
 var saveButton = function() {
 
-    var newButton = city 
+    var newButton = city.charAt(0).toUpperCase() + city.slice(1).toLowerCase();
     
     if (localStorage.getItem("citylist") == null) {
         localStorage.setItem("citylist", "[]");
