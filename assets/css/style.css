@@ -1,5 +1,6 @@
 body {
     background-color: beige;
+    overflow-x: hidden;
 }
 
 .hide {
@@ -31,6 +32,19 @@ body {
 .scroll {
     max-height: 350px;
     overflow: scroll;
+    overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #a2aebb;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
 }
 
 @media screen and (max-width: 768px) {
